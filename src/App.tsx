@@ -1,26 +1,19 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import ProjectsSidebar from "./components/ProjectsSidebar";
+import ProjectContextProvider from "./store/ProjectContext";
+import Content from "./components/Content";
+
+function App(): React.JSX.Element {
+    return (
+        <ProjectContextProvider>
+            <main className="h-screen my-8 flex gap-8">
+                <ProjectsSidebar />
+                <Content />
+            </main>
+        </ProjectContextProvider>
+    );
 }
 
 export default App;
