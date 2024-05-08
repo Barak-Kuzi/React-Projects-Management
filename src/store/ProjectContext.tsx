@@ -1,4 +1,4 @@
-import React, {createContext, SetStateAction, useState, useReducer} from "react";
+import React, {createContext, useReducer} from "react";
 
 interface ProjectsState {
     selectedProjectId: undefined | null | number,
@@ -26,14 +26,6 @@ export type Task = {
     projectId: undefined | null | number,
     id: number
 }
-
-// interface ContextProps {
-//     projects: Array<Project>,
-//     onDelete: Function
-//     onAddTask: Function
-//     onDeleteTask: Function,
-//     tasks: Array<Task>
-// }
 
 export const ProjectContext: React.Context<any> = createContext({
     projects: {},
@@ -138,32 +130,11 @@ export default function ProjectContextProvider({children}: ProjectContextProvide
     const [projectsStateNew, projectsDispatch]: [ProjectsState, React.Dispatch<Action>]
         = useReducer(projectsReducer, INITIAL_PROJECTS_STATE)
 
-    // const [projectsState, setProjectsState]: [ProjectsState, React.Dispatch<SetStateAction<ProjectsState>>]
-    //     = useState(INITIAL_PROJECTS_STATE);
-
-    // function handleClickAddProject(): void {
-    //     setProjectsState(prevProjectsState => {
-    //         return {
-    //             ...prevProjectsState,
-    //             selectedProjectId: null
-    //         };
-    //     })
-    // }
-
     function handleClickAddProject(): void {
         projectsDispatch({
             type: "CLICK_ADD_PROJECT"
         })
     }
-
-    // function handleSelectProject(id: number | undefined): void {
-    //     setProjectsState(prevProjectsState => {
-    //         return {
-    //             ...prevProjectsState,
-    //             selectedProjectId: id
-    //         };
-    //     })
-    // }
 
     function handleSelectProject(id: number | undefined): void {
         projectsDispatch({
@@ -174,39 +145,11 @@ export default function ProjectContextProvider({children}: ProjectContextProvide
         })
     }
 
-    // function handleClickCancel(): void {
-    //     setProjectsState(prevProjectsState => {
-    //         return {
-    //             ...prevProjectsState,
-    //             selectedProjectId: undefined
-    //         };
-    //     })
-    // }
-
     function handleClickCancel(): void {
         projectsDispatch({
             type: 'CLICK_CANCEL'
         })
     }
-
-    // function handleCreateNewProject(dataProject: Project): void {
-    //     setProjectsState(prevProjectsState => {
-    //         const projectId: number = Math.random();
-    //         const newProject: Project = {
-    //             ...dataProject,
-    //             id: projectId
-    //         }
-    //
-    //         return {
-    //             ...prevProjectsState,
-    //             selectedProjectId: projectId,
-    //             projects: [
-    //                 ...prevProjectsState.projects,
-    //                 newProject
-    //             ]
-    //         }
-    //     })
-    // }
 
     function handleCreateNewProject(dataProject: Project): void {
         projectsDispatch({
@@ -217,40 +160,11 @@ export default function ProjectContextProvider({children}: ProjectContextProvide
         })
     }
 
-    // function handleDeleteProject(): void {
-    //     setProjectsState(prevProjectsState => {
-    //         return {
-    //             ...prevProjectsState,
-    //             selectedProjectId: undefined,
-    //             projects: prevProjectsState.projects.filter((project: Project) =>
-    //                 project.id !== prevProjectsState.selectedProjectId)
-    //         };
-    //     })
-    // }
-
     function handleDeleteProject(): void {
         projectsDispatch({
             type: 'DELETE_PROJECT'
         })
     }
-
-    // function handleAddTask(textTask: string): void {
-    //     setProjectsState((prevProjectsState: ProjectsState) => {
-    //         const taskId: number = Math.random()
-    //         const newTask: Task = {
-    //             text: textTask,
-    //             projectId: prevProjectsState.selectedProjectId,
-    //             id: taskId
-    //         }
-    //
-    //         return {
-    //             ...prevProjectsState,
-    //             tasks: [
-    //                 newTask, ...prevProjectsState.tasks
-    //             ]
-    //         }
-    //     })
-    // }
 
     function handleAddTask(textTask: string): void {
         projectsDispatch({
@@ -261,14 +175,6 @@ export default function ProjectContextProvider({children}: ProjectContextProvide
         })
     }
 
-    // function handleDeleteTask(id: number): void {
-    //     setProjectsState((prevProjectsState: ProjectsState) => {
-    //         return {
-    //             ...prevProjectsState,
-    //             tasks: prevProjectsState.tasks.filter((task: Task) => task.id !== id)
-    //         }
-    //     })
-    // }
 
     function handleDeleteTask(id: number): void {
         projectsDispatch({
@@ -278,25 +184,6 @@ export default function ProjectContextProvider({children}: ProjectContextProvide
             }
         })
     }
-    //////////////////// OLD
-    // const selectedProject: Project | undefined = projectsState.projects.find(
-    //     (project => project.id === projectsState.selectedProjectId))
-    //
-    // const projectContextValue = {
-    //     projects: projectsState.projects,
-    //     selectedProjectId: projectsState.selectedProjectId,
-    //     tasks: projectsState.tasks,
-    //     onStartAddProject: handleClickAddProject,
-    //     onStartNewProject: handleCreateNewProject,
-    //     onCancelClicked: handleClickCancel,
-    //     onSelectProject: handleSelectProject,
-    //     onDelete: handleDeleteProject,
-    //     onAddTask: handleAddTask,
-    //     onDeleteTask: handleDeleteTask,
-    //     selectedProject: selectedProject
-    // }
-    // console.log(projectsState)
-    /////////////////////////////////
 
     const selectedProject: Project | undefined = projectsStateNew.projects.find(
         (project => project.id === projectsStateNew.selectedProjectId))
